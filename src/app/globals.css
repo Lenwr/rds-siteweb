@@ -1,0 +1,71 @@
+/* Tailwind v4 */
+@import "tailwindcss";
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Manrope:wght@700;800&display=swap');
+
+/* === THEME TOKENS (Tailwind v4) ===
+   Expose tes couleurs en --color-... pour générer
+   bg-brand-600, text-accent-500, bg-footer, etc.
+*/
+@theme {
+  /* Couleurs marque */
+  --color-brand-600: #0C3559;  /* bleu foncé principal */
+  --color-brand-700: #0A2E4D;  /* hover/active */
+  --color-brand-800: #07263F;  /* pressed */
+
+  /* Accent (orange) */
+  --color-accent-500: #FF7A00;
+
+  /* Neutres */
+  --color-ink:   #0C3559;      /* texte par défaut */
+  --color-muted: #8BA2B2;      /* texte secondaire */
+  --color-line:  rgba(255,255,255,0.18); /* séparateur footer */
+
+  /* Surfaces */
+  --color-card:   #FFFFFF;
+  --color-footer: #123B54;     /* fond footer */
+
+  /* Typo */
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-display: Manrope, Inter, system-ui, sans-serif;
+
+  /* Rayons & ombres (utilisés avec classes utilitaires custom) */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 10px 30px rgba(2,6,23,0.06);
+  --shadow-header: 0 6px 20px rgba(2,6,23,0.06);
+}
+
+/* === RESET/BASE === */
+:root { color-scheme: light; }
+html, body { height: 100%; }
+body {
+  @apply bg-white text-ink font-sans;
+}
+
+/* === UTILITAIRES CUSTOM (v4 via @utility) === */
+@utility btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-[--radius] font-medium transition;
+}
+@utility btn-primary {
+  @apply btn bg-brand-600 text-white hover:bg-brand-700 active:bg-brand-800;
+}
+@utility btn-ghost {
+  @apply btn bg-transparent text-brand-600 hover:text-brand-700;
+}
+@utility card {
+  @apply bg-card rounded-[--radius] shadow-[var(--shadow-card)];
+}
+@utility footer-title {
+  @apply text-white font-semibold;
+}
+@utility footer-link {
+  @apply transition-colors hover:text-white;
+}
+@utility input {
+  @apply w-full rounded-[--radius-sm] border border-[var(--color-line)] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600;
+}
+@utility shadow-header {
+  box-shadow: var(--shadow-header);
+}
