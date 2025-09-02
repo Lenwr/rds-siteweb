@@ -1,4 +1,5 @@
 import TarifsTabs from "../components/TarifsTabs";
+import EmailJSBinder from "../components/EmailJSBinder";
 
 export const metadata = {
   title: "Tarifs & Devis — Teranga Cargo",
@@ -56,6 +57,7 @@ export default function TarifsPage() {
         <div className="absolute left-2 -right-2 bottom-2 top-2 rounded-[var(--radius)] bg-black/5 blur-[2px]" />
         <div className="relative bg-white rounded-[var(--radius)] border border-[#D5DEE6]">
           <TarifsTabs />
+          <EmailJSBinder formId="devis-form" />
         </div>
       </div>
     </section>

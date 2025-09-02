@@ -37,12 +37,7 @@ export default function TarifsDevisForm() {
     poids: "", volume: "", date: "", message: "",
   });
 
-  function set(k, v) { setForm((s) => ({ ...s, [k]: v })); }
-  function submit(e) {
-    e.preventDefault();
-    // TODO: branche ton handler (route /api/devis ou Netlify form)
-    alert("Merci ! On revient vers vous très vite avec un devis 😊");
-  }
+  const set = (k, v) => setForm((s) => ({ ...s, [k]: v }));
 
   return (
     <div className="p-5 md:p-7">
@@ -50,27 +45,63 @@ export default function TarifsDevisForm() {
         Demander un devis personnalisé
       </h2>
 
-      <form className="mt-6 space-y-5" onSubmit={submit}>
+      {/* ⚠️ IMPORTANT: id="devis-form" pour EmailJSBinder */}
+      <form id="devis-form" className="mt-6 space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="nom">Nom complet *</Label>
-            <Input id="nom" required value={form.nom} onChange={(e) => set("nom", e.target.value)} />
+            <Input
+              id="nom"
+              name="from_name"
+              required
+              value={form.nom}
+              onChange={(e) => set("nom", e.target.value)}
+            />
           </div>
+
           <div>
             <Label htmlFor="email">Email *</Label>
-            <Input id="email" type="email" required value={form.email} onChange={(e) => set("email", e.target.value)} />
+            <Input
+              id="email"
+              type="email"
+              name="reply_to"
+              required
+              value={form.email}
+              onChange={(e) => set("email", e.target.value)}
+            />
           </div>
+
           <div>
             <Label htmlFor="tel">Téléphone *</Label>
-            <Input id="tel" required value={form.tel} onChange={(e) => set("tel", e.target.value)} placeholder="ex: +33 6 12 34 56 78" />
+            <Input
+              id="tel"
+              name="phone"
+              required
+              value={form.tel}
+              onChange={(e) => set("tel", e.target.value)}
+              placeholder="ex: +33 6 12 34 56 78"
+            />
           </div>
+
           <div>
             <Label htmlFor="ville">Ville de retrait (France)</Label>
-            <Input id="ville" value={form.ville} onChange={(e) => set("ville", e.target.value)} placeholder="ex: Paris, Lyon, Marseille" />
+            <Input
+              id="ville"
+              name="city"
+              value={form.ville}
+              onChange={(e) => set("ville", e.target.value)}
+              placeholder="ex: Paris, Lyon, Marseille"
+            />
           </div>
+
           <div className="md:col-span-2">
             <Label htmlFor="nature">Nature du colis</Label>
-            <Select id="nature" value={form.nature} onChange={(e) => set("nature", e.target.value)}>
+            <Select
+              id="nature"
+              name="type"           // ← variable attendue par ton template
+              value={form.nature}
+              onChange={(e) => set("nature", e.target.value)}
+            >
               <option>Vêtements</option>
               <option>Électronique</option>
               <option>Pièces auto</option>
@@ -78,22 +109,47 @@ export default function TarifsDevisForm() {
               <option>Autre</option>
             </Select>
           </div>
+
           <div>
             <Label htmlFor="poids">Poids estimé (kg)</Label>
-            <Input id="poids" inputMode="decimal" placeholder="ex: 25" value={form.poids} onChange={(e) => set("poids", e.target.value)} />
+            <Input
+              id="poids"
+              name="weight"
+              inputMode="decimal"
+              placeholder="ex: 25"
+              value={form.poids}
+              onChange={(e) => set("poids", e.target.value)}
+            />
           </div>
+
           <div>
             <Label htmlFor="volume">Volume estimé (m³)</Label>
-            <Input id="volume" inputMode="decimal" placeholder="ex: 0.5" value={form.volume} onChange={(e) => set("volume", e.target.value)} />
+            <Input
+              id="volume"
+              name="volume"
+              inputMode="decimal"
+              placeholder="ex: 0.5"
+              value={form.volume}
+              onChange={(e) => set("volume", e.target.value)}
+            />
           </div>
+
           <div className="md:col-span-2">
             <Label htmlFor="date">Enlèvement souhaité</Label>
-            <Input id="date" type="date" value={form.date} onChange={(e) => set("date", e.target.value)} />
+            <Input
+              id="date"
+              type="date"
+              name="date"
+              value={form.date}
+              onChange={(e) => set("date", e.target.value)}
+            />
           </div>
+
           <div className="md:col-span-2">
             <Label htmlFor="message">Message (optionnel)</Label>
             <textarea
               id="message"
+              name="message"
               rows={4}
               value={form.message}
               onChange={(e) => set("message", e.target.value)}
@@ -102,6 +158,13 @@ export default function TarifsDevisForm() {
             />
           </div>
         </div>
+
+        {/* Variables supplémentaires utilisées par EmailJS */}
+        <input type="hidden" name="destination" value="Sénégal" />
+        <input type="hidden" name="page" value="Tarifs & Devis — Teranga Cargo" />
+        <input type="hidden" name="source" value="site-web" />
+        {/* Honeypot anti-spam */}
+        <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
 
         <button
           type="submit"
