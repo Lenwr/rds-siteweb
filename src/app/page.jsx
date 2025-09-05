@@ -137,7 +137,7 @@ export default function HomePage() {
         <div className="mt-6 grid md:grid-cols-2 gap-4">
           {[
             {q:"Quels sont les délais de livraison ?", a:"Les délais de livraisons sont de 3 à 4 semaines à partir de la date du chargement du container."},
-            {q:"Comment suivre mon colis ?", a:"En entrant votre numéro de bordereau qui sera renseignements sur votre bordereau"},
+            {q:"Comment suivre mon colis ?", a:"En entrant votre numéro de bordereau qui sera renseigné sur votre bordereau"},
             {q:"Quels sont les modes de paiement", a:"En espèces , Par virement"},
           ].map(({q,a}) => (
             <details key={q} className="rounded-[var(--radius)] border border-[#E2EAF0] bg-white p-4">
