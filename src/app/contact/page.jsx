@@ -9,7 +9,7 @@ export const metadata = {
 const CONTACTS = {
   fr: { label: "France", tel: "+33613044335" },
   sn: { label: "Sénégal", tel: "+221774565983" },
-  email: "raymond.diop@gmail.com",
+  email: "terangacargogroupage@gmail.com",
   whatsapp: "https://wa.me/33613044335",
 };
 
