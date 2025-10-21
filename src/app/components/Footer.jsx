@@ -45,7 +45,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} className="text-gray-300" />
-                <a href="mailto:raymond.diop@gmail.com" className="footer-link">raymond.diop@gmail.com</a>
+                <a href="mailto:terangacargogroupage@gmail.com" className="footer-link">raymond.diop@gmail.com</a>
               </li>
             </ul>
           </div>
